@@ -14,11 +14,20 @@ public class BreakerBehaviour : MonoBehaviour {
 		public Material material;
 	}
 
+	[System.Serializable]
+	public class Wall
+	{
+		public char key;
+		public GameObject tile;
+		public float rotation;
+	}
+
 	public TileMaterialEntry[] spellAnimations;    
 	public List<TextAsset> levels;
 	public GameObject bat;
 	public GameObject ball;
-	public GameObject wall;
+	public Wall[] walls;
+
 	public GameObject brick;
 	public Material[] materials;
 	public TileMaterialEntry[] tileMaterials;
@@ -64,22 +73,26 @@ public class BreakerBehaviour : MonoBehaviour {
 				char c = levelLines [lineNr] [charNr];
 				GameObject tile = null;
 				Renderer rend;
-				if (c == 'w') {
-					tile = GameObject.Instantiate (wall);
-				}
-				int j;
-				if (int.TryParse (c.ToString (), out j)) {
-					tile = GameObject.Instantiate (brick);
-					rend = tile.GetComponent<Renderer> ();
-					rend.material = materials [j];
+				var wallTiles = walls.Where<Wall> (entry => entry.key == c);
+				if (wallTiles.Any ()) {
+					Wall wall = wallTiles.First ();
+					tile = GameObject.Instantiate (wall.tile);
+					tile.transform.rotation = Quaternion.Euler(0, 0, wall.rotation);
 				} else {
-					var tileMaterialEntries = tileMaterials.Where<TileMaterialEntry> (entry => entry.key == c);
-					if (tileMaterialEntries.Any()) {
-						TileMaterialEntry tileMaterialEntry = tileMaterialEntries.First ();
+					int j;
+					if (int.TryParse (c.ToString (), out j)) {
 						tile = GameObject.Instantiate (brick);
 						rend = tile.GetComponent<Renderer> ();
-						tile.GetComponent<BrickBehaviour>().brickType = tileMaterialEntry.key;
-						rend.material = tileMaterialEntry.material;
+						rend.material = materials [j];
+					} else {
+						var tileMaterialEntries = tileMaterials.Where<TileMaterialEntry> (entry => entry.key == c);
+						if (tileMaterialEntries.Any ()) {
+							TileMaterialEntry tileMaterialEntry = tileMaterialEntries.First ();
+							tile = GameObject.Instantiate (brick);
+							rend = tile.GetComponent<Renderer> ();
+							tile.GetComponent<BrickBehaviour> ().brickType = tileMaterialEntry.key;
+							rend.material = tileMaterialEntry.material;
+						}
 					}
 				}
 				if (tile != null) {

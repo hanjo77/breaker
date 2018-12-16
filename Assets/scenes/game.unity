@@ -701,10 +701,58 @@ MonoBehaviour:
   spellAnimations: []
   levels:
   - {fileID: 4900000, guid: eea2e8f0a8178423d911f142a19bddbf, type: 3}
-  bat: {fileID: 1368601360974184, guid: 43591447a6e8542c19e32711cd9ee09e, type: 2}
+  bat: {fileID: 1310191969147496, guid: 5b72ea831d10b46bea10df56b0499130, type: 2}
   ball: {fileID: 1285538807836190, guid: bfb1485f64ad74ad199ca07451f1bc0e, type: 2}
-  wall: {fileID: 1508839076934944, guid: e47fff24017c4430197668d7418d756d, type: 2}
-  brick: {fileID: 1240538691372930, guid: fe16fa0cebf7c4c09bbf3b19eed6db41, type: 2}
+  walls:
+  - key: 119
+    tile: {fileID: 1473298883448950, guid: 31414eaf62bff4907a3f04742d4117e5, type: 2}
+    rotation: 0
+  - key: 9484
+    tile: {fileID: 1788290591311204, guid: f0b7a7186c6224b1183e2950e57ba44d, type: 2}
+    rotation: 0
+  - key: 9488
+    tile: {fileID: 1788290591311204, guid: f0b7a7186c6224b1183e2950e57ba44d, type: 2}
+    rotation: -90
+  - key: 9496
+    tile: {fileID: 1788290591311204, guid: f0b7a7186c6224b1183e2950e57ba44d, type: 2}
+    rotation: -180
+  - key: 9492
+    tile: {fileID: 1788290591311204, guid: f0b7a7186c6224b1183e2950e57ba44d, type: 2}
+    rotation: -270
+  - key: 117
+    tile: {fileID: 1498787192599032, guid: 4e92d79f41de845c69ce0600b9543a22, type: 2}
+    rotation: 0
+  - key: 114
+    tile: {fileID: 1498787192599032, guid: 4e92d79f41de845c69ce0600b9543a22, type: 2}
+    rotation: -90
+  - key: 100
+    tile: {fileID: 1498787192599032, guid: 4e92d79f41de845c69ce0600b9543a22, type: 2}
+    rotation: -180
+  - key: 108
+    tile: {fileID: 1498787192599032, guid: 4e92d79f41de845c69ce0600b9543a22, type: 2}
+    rotation: -270
+  - key: 9508
+    tile: {fileID: 1136672279240406, guid: 354fc6804b6c24f1289dcafea02df917, type: 2}
+    rotation: 0
+  - key: 9524
+    tile: {fileID: 1136672279240406, guid: 354fc6804b6c24f1289dcafea02df917, type: 2}
+    rotation: -90
+  - key: 9500
+    tile: {fileID: 1136672279240406, guid: 354fc6804b6c24f1289dcafea02df917, type: 2}
+    rotation: -180
+  - key: 9516
+    tile: {fileID: 1136672279240406, guid: 354fc6804b6c24f1289dcafea02df917, type: 2}
+    rotation: -270
+  - key: 9532
+    tile: {fileID: 1510573480324336, guid: 6edb7f1a417094ca48f86adc79cbd003, type: 2}
+    rotation: 0
+  - key: 9474
+    tile: {fileID: 1255668806486148, guid: 25bd4ae137cbe4071ad84b5b62c12642, type: 2}
+    rotation: 0
+  - key: 45
+    tile: {fileID: 1255668806486148, guid: 25bd4ae137cbe4071ad84b5b62c12642, type: 2}
+    rotation: -90
+  brick: {fileID: 1066308811886236, guid: 8d009258c0c5448d7ad757de708e3c86, type: 2}
   materials:
   - {fileID: 2100000, guid: 7aac5c1c3839543be975933c3f10273d, type: 2}
   - {fileID: 2100000, guid: ca1da072dd4204dfe80c4e98c4093ecc, type: 2}

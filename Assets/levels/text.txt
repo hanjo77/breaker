@@ -27,8 +27,10 @@ ww 1 00  00 1 ww
 ww  00    00  ww
 ww 00      00 ww
 ww 0        0 ww
-ww            ww
-ww            ww
-ww            ww
-ww            ww
-ww            ww
+ww           l-r
+ww           u u
+ww           │ │
+ww           d d
+ww           ┌┬┐
+ww           ├┼┤
+ww           └┴┘
