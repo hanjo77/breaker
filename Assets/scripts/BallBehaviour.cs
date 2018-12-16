@@ -13,11 +13,13 @@ public class BallBehaviour : MonoBehaviour {
 	private float speed;
 	private Vector3 direction;
 	private BreakerBehaviour gameInstance;
+	private BatBehaviour bat;
 	private bool isWaiting;
 
 	// Use this for initialization
 	void Start () {
 		gameInstance = GetComponentInParent<BreakerBehaviour> ();
+		bat = GameObject.FindGameObjectsWithTag("Bat")[0].GetComponent<BatBehaviour>();
 		lastUpdate = Time.fixedTime;
 		Reset ();
 	}
@@ -88,7 +90,13 @@ public class BallBehaviour : MonoBehaviour {
 			}
 
 			if (otherObject.tag == "Brick") {
-				gameInstance.score += otherObject.GetComponent<BrickBehaviour>().score;
+				BrickBehaviour brick = otherObject.GetComponent<BrickBehaviour> ();
+				if (brick.brickType == '<') {
+					bat.Shrink ();
+				} else if (brick.brickType == '>') {
+					bat.Grow ();
+				}
+				gameInstance.score += brick.score;
 				GameObject.Destroy (otherObject);
 			}
 		}

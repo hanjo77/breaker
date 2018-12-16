@@ -698,6 +698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad0f49c9a672344d3a8882e5eeaa9176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellAnimations: []
   levels:
   - {fileID: 4900000, guid: eea2e8f0a8178423d911f142a19bddbf, type: 3}
   bat: {fileID: 1368601360974184, guid: 43591447a6e8542c19e32711cd9ee09e, type: 2}
@@ -707,6 +708,11 @@ MonoBehaviour:
   materials:
   - {fileID: 2100000, guid: 7aac5c1c3839543be975933c3f10273d, type: 2}
   - {fileID: 2100000, guid: ca1da072dd4204dfe80c4e98c4093ecc, type: 2}
+  tileMaterials:
+  - key: 62
+    material: {fileID: 2100000, guid: d8b58202d6a7e43b1a9f4782f1698f44, type: 2}
+  - key: 60
+    material: {fileID: 2100000, guid: 9709e86ac4c9f4c41965e5d5e8bfd953, type: 2}
   scoreTextField: {fileID: 472716740}
   livesTextField: {fileID: 2077508694}
   initialLives: 5

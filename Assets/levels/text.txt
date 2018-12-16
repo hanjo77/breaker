@@ -12,8 +12,8 @@ ww 11 0000 11 ww
 ww 1 00  00 1 ww
 ww  00    00  ww
 ww 00      00 ww
-ww 0        0 ww
-ww 1        1 ww
+ww 0 <<  >> 0 ww
+ww 1 <<  >> 1 ww
 ww 11      11 ww
 ww  11    11  ww
 ww   11  11   ww

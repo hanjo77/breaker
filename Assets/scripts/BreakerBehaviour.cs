@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,12 +7,21 @@ using UnityEngine.SceneManagement;
 
 public class BreakerBehaviour : MonoBehaviour {
 
+	[System.Serializable]
+	public class TileMaterialEntry
+	{
+		public char key;
+		public Material material;
+	}
+
+	public TileMaterialEntry[] spellAnimations;    
 	public List<TextAsset> levels;
 	public GameObject bat;
 	public GameObject ball;
 	public GameObject wall;
 	public GameObject brick;
 	public Material[] materials;
+	public TileMaterialEntry[] tileMaterials;
 	public Text scoreTextField;
 	public Text livesTextField;
 	public int initialLives = 5;
@@ -39,7 +49,7 @@ public class BreakerBehaviour : MonoBehaviour {
 		}
 		set {
 			_lives = value;
-			if (_lives <= 0) {
+			if (_lives < 0) {
 				SceneManager.LoadScene ("game-over");
 			} else {
 				livesTextField.text = _lives.ToString();
@@ -58,10 +68,19 @@ public class BreakerBehaviour : MonoBehaviour {
 					tile = GameObject.Instantiate (wall);
 				}
 				int j;
-				if (int.TryParse(c.ToString(), out j)) {
+				if (int.TryParse (c.ToString (), out j)) {
 					tile = GameObject.Instantiate (brick);
 					rend = tile.GetComponent<Renderer> ();
-					rend.material = materials[j];
+					rend.material = materials [j];
+				} else {
+					var tileMaterialEntries = tileMaterials.Where<TileMaterialEntry> (entry => entry.key == c);
+					if (tileMaterialEntries.Any()) {
+						TileMaterialEntry tileMaterialEntry = tileMaterialEntries.First ();
+						tile = GameObject.Instantiate (brick);
+						rend = tile.GetComponent<Renderer> ();
+						tile.GetComponent<BrickBehaviour>().brickType = tileMaterialEntry.key;
+						rend.material = tileMaterialEntry.material;
+					}
 				}
 				if (tile != null) {
 					tile.transform.position = new Vector3 (charNr - 7.5f, levelLines.Length - (lineNr + 5), 0);

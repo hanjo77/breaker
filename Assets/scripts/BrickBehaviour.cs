@@ -5,6 +5,7 @@ using UnityEngine;
 public class BrickBehaviour : MonoBehaviour {
 
 	public int score = 100;
+	public char brickType;
 
 	// Use this for initialization
 	void Start () {
