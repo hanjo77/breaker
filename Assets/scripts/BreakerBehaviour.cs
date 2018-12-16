@@ -8,29 +8,21 @@ using UnityEngine.SceneManagement;
 public class BreakerBehaviour : MonoBehaviour {
 
 	[System.Serializable]
-	public class TileMaterialEntry
+	public class Tile
 	{
 		public char key;
+		public GameObject tileObject;
+		public float rotation;
 		public Material material;
 	}
-
-	[System.Serializable]
-	public class Wall
-	{
-		public char key;
-		public GameObject tile;
-		public float rotation;
-	}
-
-	public TileMaterialEntry[] spellAnimations;    
+ 
 	public List<TextAsset> levels;
 	public GameObject bat;
 	public GameObject ball;
-	public Wall[] walls;
+	public Tile[] tiles;
 
 	public GameObject brick;
 	public Material[] materials;
-	public TileMaterialEntry[] tileMaterials;
 	public Text scoreTextField;
 	public Text livesTextField;
 	public int initialLives = 5;
@@ -73,27 +65,14 @@ public class BreakerBehaviour : MonoBehaviour {
 				char c = levelLines [lineNr] [charNr];
 				GameObject tile = null;
 				Renderer rend;
-				var wallTiles = walls.Where<Wall> (entry => entry.key == c);
-				if (wallTiles.Any ()) {
-					Wall wall = wallTiles.First ();
-					tile = GameObject.Instantiate (wall.tile);
-					tile.transform.rotation = Quaternion.Euler(0, 0, wall.rotation);
-				} else {
-					int j;
-					if (int.TryParse (c.ToString (), out j)) {
-						tile = GameObject.Instantiate (brick);
-						rend = tile.GetComponent<Renderer> ();
-						rend.material = materials [j];
-					} else {
-						var tileMaterialEntries = tileMaterials.Where<TileMaterialEntry> (entry => entry.key == c);
-						if (tileMaterialEntries.Any ()) {
-							TileMaterialEntry tileMaterialEntry = tileMaterialEntries.First ();
-							tile = GameObject.Instantiate (brick);
-							rend = tile.GetComponent<Renderer> ();
-							tile.GetComponent<BrickBehaviour> ().brickType = tileMaterialEntry.key;
-							rend.material = tileMaterialEntry.material;
-						}
-					}
+				var tileEntries = tiles.Where<Tile> (entry => entry.key == c);
+				if (tileEntries.Any ()) {
+					Tile tileEntry = tileEntries.First ();
+					tile = GameObject.Instantiate (tileEntry.tileObject);
+					tile.transform.rotation = Quaternion.Euler(0, 0, tileEntry.rotation);
+					tile.GetComponent<BrickBehaviour> ().brickType = tileEntry.key;
+					rend = tile.GetComponent<Renderer> ();
+					rend.material = tileEntry.material;
 				}
 				if (tile != null) {
 					tile.transform.position = new Vector3 (charNr - 7.5f, levelLines.Length - (lineNr + 5), 0);

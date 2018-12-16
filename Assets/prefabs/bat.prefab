@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4247014942021342}
   - component: {fileID: 33848751440196694}
   - component: {fileID: 23477040421957720}
-  - component: {fileID: 65647745683359110}
   - component: {fileID: 114218889333380592}
+  - component: {fileID: 65120308910218692}
   m_Layer: 0
   m_Name: bat
   m_TagString: Bat
@@ -84,7 +84,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1310191969147496}
   m_Mesh: {fileID: 4300000, guid: a2d064c2fd56847e48db853becf2cb8f, type: 3}
---- !u!65 &65647745683359110
+--- !u!65 &65120308910218692
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -94,7 +94,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 0.5, z: 1.171648}
+  m_Size: {x: 1, y: 0.5, z: 1.171648}
   m_Center: {x: 0, y: 0, z: -0.08582401}
 --- !u!114 &114218889333380592
 MonoBehaviour:

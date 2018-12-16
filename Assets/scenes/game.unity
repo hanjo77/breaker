@@ -698,69 +698,115 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad0f49c9a672344d3a8882e5eeaa9176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellAnimations: []
   levels:
   - {fileID: 4900000, guid: eea2e8f0a8178423d911f142a19bddbf, type: 3}
   bat: {fileID: 1310191969147496, guid: 5b72ea831d10b46bea10df56b0499130, type: 2}
   ball: {fileID: 1285538807836190, guid: bfb1485f64ad74ad199ca07451f1bc0e, type: 2}
-  walls:
+  tiles:
+  - key: 48
+    tileObject: {fileID: 1066308811886236, guid: 8d009258c0c5448d7ad757de708e3c86,
+      type: 2}
+    rotation: 0
+    material: {fileID: 2100000, guid: 7aac5c1c3839543be975933c3f10273d, type: 2}
+  - key: 49
+    tileObject: {fileID: 1066308811886236, guid: 8d009258c0c5448d7ad757de708e3c86,
+      type: 2}
+    rotation: 0
+    material: {fileID: 2100000, guid: ca1da072dd4204dfe80c4e98c4093ecc, type: 2}
   - key: 119
-    tile: {fileID: 1473298883448950, guid: 31414eaf62bff4907a3f04742d4117e5, type: 2}
+    tileObject: {fileID: 1473298883448950, guid: 31414eaf62bff4907a3f04742d4117e5,
+      type: 2}
     rotation: 0
+    material: {fileID: 2100000, guid: 12f8f24d0ba1244cd8261aa4dc113140, type: 2}
   - key: 9484
-    tile: {fileID: 1788290591311204, guid: f0b7a7186c6224b1183e2950e57ba44d, type: 2}
+    tileObject: {fileID: 1788290591311204, guid: f0b7a7186c6224b1183e2950e57ba44d,
+      type: 2}
     rotation: 0
+    material: {fileID: 2100000, guid: 12f8f24d0ba1244cd8261aa4dc113140, type: 2}
   - key: 9488
-    tile: {fileID: 1788290591311204, guid: f0b7a7186c6224b1183e2950e57ba44d, type: 2}
+    tileObject: {fileID: 1788290591311204, guid: f0b7a7186c6224b1183e2950e57ba44d,
+      type: 2}
     rotation: -90
+    material: {fileID: 2100000, guid: 12f8f24d0ba1244cd8261aa4dc113140, type: 2}
   - key: 9496
-    tile: {fileID: 1788290591311204, guid: f0b7a7186c6224b1183e2950e57ba44d, type: 2}
-    rotation: -180
+    tileObject: {fileID: 1788290591311204, guid: f0b7a7186c6224b1183e2950e57ba44d,
+      type: 2}
+    rotation: 180
+    material: {fileID: 2100000, guid: 12f8f24d0ba1244cd8261aa4dc113140, type: 2}
   - key: 9492
-    tile: {fileID: 1788290591311204, guid: f0b7a7186c6224b1183e2950e57ba44d, type: 2}
-    rotation: -270
-  - key: 117
-    tile: {fileID: 1498787192599032, guid: 4e92d79f41de845c69ce0600b9543a22, type: 2}
-    rotation: 0
-  - key: 114
-    tile: {fileID: 1498787192599032, guid: 4e92d79f41de845c69ce0600b9543a22, type: 2}
-    rotation: -90
-  - key: 100
-    tile: {fileID: 1498787192599032, guid: 4e92d79f41de845c69ce0600b9543a22, type: 2}
-    rotation: -180
-  - key: 108
-    tile: {fileID: 1498787192599032, guid: 4e92d79f41de845c69ce0600b9543a22, type: 2}
-    rotation: -270
-  - key: 9508
-    tile: {fileID: 1136672279240406, guid: 354fc6804b6c24f1289dcafea02df917, type: 2}
-    rotation: 0
-  - key: 9524
-    tile: {fileID: 1136672279240406, guid: 354fc6804b6c24f1289dcafea02df917, type: 2}
-    rotation: -90
+    tileObject: {fileID: 1788290591311204, guid: f0b7a7186c6224b1183e2950e57ba44d,
+      type: 2}
+    rotation: 90
+    material: {fileID: 2100000, guid: 12f8f24d0ba1244cd8261aa4dc113140, type: 2}
   - key: 9500
-    tile: {fileID: 1136672279240406, guid: 354fc6804b6c24f1289dcafea02df917, type: 2}
-    rotation: -180
+    tileObject: {fileID: 1136672279240406, guid: 354fc6804b6c24f1289dcafea02df917,
+      type: 2}
+    rotation: 180
+    material: {fileID: 2100000, guid: 12f8f24d0ba1244cd8261aa4dc113140, type: 2}
   - key: 9516
-    tile: {fileID: 1136672279240406, guid: 354fc6804b6c24f1289dcafea02df917, type: 2}
-    rotation: -270
-  - key: 9532
-    tile: {fileID: 1510573480324336, guid: 6edb7f1a417094ca48f86adc79cbd003, type: 2}
+    tileObject: {fileID: 1136672279240406, guid: 354fc6804b6c24f1289dcafea02df917,
+      type: 2}
+    rotation: 90
+    material: {fileID: 2100000, guid: 12f8f24d0ba1244cd8261aa4dc113140, type: 2}
+  - key: 9508
+    tileObject: {fileID: 1136672279240406, guid: 354fc6804b6c24f1289dcafea02df917,
+      type: 2}
     rotation: 0
-  - key: 9474
-    tile: {fileID: 1255668806486148, guid: 25bd4ae137cbe4071ad84b5b62c12642, type: 2}
-    rotation: 0
-  - key: 45
-    tile: {fileID: 1255668806486148, guid: 25bd4ae137cbe4071ad84b5b62c12642, type: 2}
+    material: {fileID: 2100000, guid: 12f8f24d0ba1244cd8261aa4dc113140, type: 2}
+  - key: 9524
+    tileObject: {fileID: 1136672279240406, guid: 354fc6804b6c24f1289dcafea02df917,
+      type: 2}
     rotation: -90
+    material: {fileID: 2100000, guid: 12f8f24d0ba1244cd8261aa4dc113140, type: 2}
+  - key: 9532
+    tileObject: {fileID: 1510573480324336, guid: 6edb7f1a417094ca48f86adc79cbd003,
+      type: 2}
+    rotation: 0
+    material: {fileID: 2100000, guid: 12f8f24d0ba1244cd8261aa4dc113140, type: 2}
+  - key: 9474
+    tileObject: {fileID: 1255668806486148, guid: 25bd4ae137cbe4071ad84b5b62c12642,
+      type: 2}
+    rotation: 0
+    material: {fileID: 2100000, guid: 12f8f24d0ba1244cd8261aa4dc113140, type: 2}
+  - key: 45
+    tileObject: {fileID: 1255668806486148, guid: 25bd4ae137cbe4071ad84b5b62c12642,
+      type: 2}
+    rotation: 90
+    material: {fileID: 2100000, guid: 12f8f24d0ba1244cd8261aa4dc113140, type: 2}
+  - key: 117
+    tileObject: {fileID: 1498787192599032, guid: 4e92d79f41de845c69ce0600b9543a22,
+      type: 2}
+    rotation: 0
+    material: {fileID: 2100000, guid: 12f8f24d0ba1244cd8261aa4dc113140, type: 2}
+  - key: 114
+    tileObject: {fileID: 1498787192599032, guid: 4e92d79f41de845c69ce0600b9543a22,
+      type: 2}
+    rotation: -90
+    material: {fileID: 2100000, guid: 12f8f24d0ba1244cd8261aa4dc113140, type: 2}
+  - key: 100
+    tileObject: {fileID: 1498787192599032, guid: 4e92d79f41de845c69ce0600b9543a22,
+      type: 2}
+    rotation: 180
+    material: {fileID: 2100000, guid: 12f8f24d0ba1244cd8261aa4dc113140, type: 2}
+  - key: 108
+    tileObject: {fileID: 1498787192599032, guid: 4e92d79f41de845c69ce0600b9543a22,
+      type: 2}
+    rotation: 90
+    material: {fileID: 2100000, guid: 12f8f24d0ba1244cd8261aa4dc113140, type: 2}
+  - key: 60
+    tileObject: {fileID: 1066308811886236, guid: 8d009258c0c5448d7ad757de708e3c86,
+      type: 2}
+    rotation: -90
+    material: {fileID: 2100000, guid: 9709e86ac4c9f4c41965e5d5e8bfd953, type: 2}
+  - key: 62
+    tileObject: {fileID: 1066308811886236, guid: 8d009258c0c5448d7ad757de708e3c86,
+      type: 2}
+    rotation: -90
+    material: {fileID: 2100000, guid: d8b58202d6a7e43b1a9f4782f1698f44, type: 2}
   brick: {fileID: 1066308811886236, guid: 8d009258c0c5448d7ad757de708e3c86, type: 2}
   materials:
   - {fileID: 2100000, guid: 7aac5c1c3839543be975933c3f10273d, type: 2}
   - {fileID: 2100000, guid: ca1da072dd4204dfe80c4e98c4093ecc, type: 2}
-  tileMaterials:
-  - key: 62
-    material: {fileID: 2100000, guid: d8b58202d6a7e43b1a9f4782f1698f44, type: 2}
-  - key: 60
-    material: {fileID: 2100000, guid: 9709e86ac4c9f4c41965e5d5e8bfd953, type: 2}
   scoreTextField: {fileID: 472716740}
   livesTextField: {fileID: 2077508694}
   initialLives: 5
