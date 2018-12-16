@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BreakerBehaviour : MonoBehaviour {
 
@@ -10,15 +12,40 @@ public class BreakerBehaviour : MonoBehaviour {
 	public GameObject wall;
 	public GameObject brick;
 	public Material[] materials;
-	public GUIText scoreTextField;
-	public GUIText livesTextField;
+	public Text scoreTextField;
+	public Text livesTextField;
 	public int initialLives = 5;
 
 	private int currentLevel = 0;
-	private int score = 0;
 	private float topY;
 	private GameObject playBat;
 	private GameObject playBall;
+
+	private int _score;
+	public int score {
+		get {
+			return _score;
+		}
+		set {
+			_score = value;
+			scoreTextField.text = _score.ToString();
+		}
+	}
+
+	private int _lives;
+	public int lives {
+		get {
+			return _lives;
+		}
+		set {
+			_lives = value;
+			if (_lives <= 0) {
+				SceneManager.LoadScene ("game-over");
+			} else {
+				livesTextField.text = _lives.ToString();
+			}
+		}
+	}
 
 	private void DrawLevel(string levelString) {
 		string[] levelLines = levelString.Split('\n');
@@ -46,6 +73,8 @@ public class BreakerBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		lives = initialLives;
+		score = 0;
 		playBat = GameObject.Instantiate (bat);
 		playBall = GameObject.Instantiate (ball);
 		playBall.transform.position = playBat.transform.position + new Vector3(0, 2, 0);

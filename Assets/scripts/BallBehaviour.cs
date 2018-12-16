@@ -12,33 +12,39 @@ public class BallBehaviour : MonoBehaviour {
 	private float lastUpdate;
 	private float speed;
 	private Vector3 direction;
+	private BreakerBehaviour gameInstance;
+	private bool isWaiting;
 
 	// Use this for initialization
 	void Start () {
+		gameInstance = GetComponentInParent<BreakerBehaviour> ();
 		lastUpdate = Time.fixedTime;
 		Reset ();
 	}
 
 	// Update is called once per frame
 	void FixedUpdate () {
-		transform.position += direction * speed * Time.fixedDeltaTime;
-		if (transform.position.y < -6) {
-			direction *= -1;
-		}
+		if (!isWaiting) {
+			transform.position += direction * speed * Time.fixedDeltaTime;
+			if (transform.position.y < -6) {
+				gameInstance.lives--;
+				isWaiting = true;
+				StartCoroutine(WaitAfterDeath());
+				direction *= -1;
+			}
 
-		transform.RotateAround (transform.position, Vector3.Cross (direction, new Vector3 (0, 0, 1)), 4);
+			transform.RotateAround (transform.position, Vector3.Cross (direction, new Vector3 (0, 0, 1)), 4);
 
-		Debug.Log (Time.fixedTime);
-		Debug.Log (Time.fixedTime - lastUpdate);
-		if (Time.fixedTime - lastUpdate > shadowInterval) {
-			lastUpdate = Time.fixedTime;
-			GameObject shadow = GameObject.Instantiate (ballShadowObject);
-			shadow.transform.SetParent (transform.parent);
-			shadow.transform.localPosition = transform.localPosition;
-			shadow.transform.localRotation = transform.localRotation;
-			Color c = shadow.GetComponent<Renderer> ().material.color;
-			c.a = .5f;
-			shadow.GetComponent<Renderer> ().material.color = c;
+			if (Time.fixedTime - lastUpdate > shadowInterval) {
+				lastUpdate = Time.fixedTime;
+				GameObject shadow = GameObject.Instantiate (ballShadowObject);
+				shadow.transform.SetParent (transform.parent);
+				shadow.transform.localPosition = transform.localPosition;
+				shadow.transform.localRotation = transform.localRotation;
+				Color c = shadow.GetComponent<Renderer> ().material.color;
+				c.a = .5f;
+				shadow.GetComponent<Renderer> ().material.color = c;
+			}
 		}
 	}
 
@@ -47,35 +53,44 @@ public class BallBehaviour : MonoBehaviour {
 		direction = new Vector3(0, -1, 0);
 	}
 
+	IEnumerator WaitAfterDeath()
+	{
+		yield return new WaitForSeconds(2);
+		isWaiting = false;
+	}
+
 	void OnCollisionEnter(Collision collision)
 	{
 		GameObject otherObject = collision.collider.gameObject;
 		bool isVerticalCollision = Mathf.Abs (transform.position.x - otherObject.transform.position.x) < Mathf.Abs (transform.position.y - otherObject.transform.position.y);
 
-		if (isVerticalCollision) {
-			if (transform.position.y < otherObject.transform.position.y) {
-				direction = new Vector3 (direction.x, Mathf.Abs (direction.y) * -1, direction.z).normalized;
+		if (otherObject.tag != "Bat" || otherObject.transform.position.y < transform.position.y) {
+			if (isVerticalCollision) {
+				if (transform.position.y < otherObject.transform.position.y) {
+					direction = new Vector3 (direction.x, Mathf.Abs (direction.y) * -1, direction.z).normalized;
+				} else {
+					direction = new Vector3 (direction.x, Mathf.Abs (direction.y), direction.z).normalized;
+				}
 			} else {
-				direction = new Vector3 (direction.x, Mathf.Abs (direction.y), direction.z).normalized;
+				if (transform.position.x < otherObject.transform.position.x) {
+					direction = new Vector3(Mathf.Abs(direction.x) * -1, direction.y, direction.z).normalized;
+				} else {
+					direction = new Vector3(Mathf.Abs(direction.x), direction.y, direction.z).normalized;
+				}
 			}
-		} else {
-			if (transform.position.x < otherObject.transform.position.x) {
-				direction = new Vector3(Mathf.Abs(direction.x) * -1, direction.y, direction.z).normalized;
-			} else {
-				direction = new Vector3(Mathf.Abs(direction.x), direction.y, direction.z).normalized;
-			}
-		}
 
-		if (otherObject.tag == "Bat") {
-			direction += (transform.position - otherObject.transform.position).normalized;
-			direction.Normalize ();
-			direction += new Vector3(0, .8f, 0);
-			direction.Normalize ();
-			speed += acceleration;
-		}
-			
-		if (otherObject.tag == "Brick") {
-			GameObject.Destroy (otherObject);
+			if (otherObject.tag == "Bat") {
+				direction += (transform.position - otherObject.transform.position).normalized;
+				direction.Normalize ();
+				direction += new Vector3(0, .8f, 0);
+				direction.Normalize ();
+				speed += acceleration;
+			}
+
+			if (otherObject.tag == "Brick") {
+				gameInstance.score += otherObject.GetComponent<BrickBehaviour>().score;
+				GameObject.Destroy (otherObject);
+			}
 		}
 	}
 }
