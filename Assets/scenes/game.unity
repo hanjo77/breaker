@@ -861,6 +861,7 @@ MonoBehaviour:
   scoreTextField: {fileID: 472716740}
   livesTextField: {fileID: 2077508694}
   initialLives: 5
+  visibleRows: 16
 --- !u!4 &2016423705
 Transform:
   m_ObjectHideFlags: 0

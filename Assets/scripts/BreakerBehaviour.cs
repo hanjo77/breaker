@@ -26,11 +26,15 @@ public class BreakerBehaviour : MonoBehaviour {
 	public Text scoreTextField;
 	public Text livesTextField;
 	public int initialLives = 5;
+	public int visibleRows = 20;
 
 	private int currentLevel = 0;
+	private int currentRow = 0;
+	private int lastRow = 0;
 	private float topY;
 	private GameObject playBat;
 	private GameObject playBall;
+	private string[] levelLines;
 
 	private int _score;
 	public int score {
@@ -58,9 +62,9 @@ public class BreakerBehaviour : MonoBehaviour {
 		}
 	}
 
-	private void DrawLevel(string levelString) {
-		string[] levelLines = levelString.Split('\n');
-		for (int lineNr = 0; lineNr < levelLines.Length; lineNr++) {
+	private void DrawLevel() {
+		int startRow = levelLines.Length - visibleRows + currentRow;
+		for (int lineNr = startRow; lineNr < lastRow; lineNr++) {
 			for (int charNr = 0; charNr < levelLines [lineNr].Length; charNr++) {
 				char c = levelLines [lineNr] [charNr];
 				GameObject tile = null;
@@ -75,15 +79,18 @@ public class BreakerBehaviour : MonoBehaviour {
 					rend.material = tileEntry.material;
 				}
 				if (tile != null) {
-					tile.transform.position = new Vector3 (charNr - 7.5f, levelLines.Length - (lineNr + 5), 0);
-					tile.transform.SetParent (this.transform);
+					tile.transform.SetParent (transform);
+					tile.transform.localPosition = new Vector3 (charNr - 7.5f, levelLines.Length - (lineNr + 5), 0);
 				}
 			}
 		}
+		lastRow = startRow;
 	}
 
 	// Use this for initialization
 	void Start () {
+		levelLines = levels [currentLevel].text.Split('\n');
+		lastRow = levelLines.Length;
 		lives = initialLives;
 		score = 0;
 		playBat = GameObject.Instantiate (bat);
@@ -91,7 +98,7 @@ public class BreakerBehaviour : MonoBehaviour {
 		playBall.transform.position = playBat.transform.position + new Vector3(0, 2, 0);
 		playBat.transform.SetParent(transform.parent);
 		playBall.transform.SetParent(transform);
-		DrawLevel (levels [currentLevel].text);
+		DrawLevel ();
 	}
 	
 	// Update is called once per frame
@@ -99,7 +106,11 @@ public class BreakerBehaviour : MonoBehaviour {
 		if (playBall.transform.position.y - transform.position.y > 2 - transform.position.y) {
 			topY = playBall.transform.position.y - transform.position.y;
 			float dist = (2 - transform.position.y) - topY;
-			transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y + dist, transform.position.z), 5 * Time.fixedDeltaTime);
+			transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y + dist, transform.position.z), 10 * Time.fixedDeltaTime);
+		}
+		if ((int)transform.position.y != currentRow) {
+			currentRow = (int)transform.position.y;
+			DrawLevel ();
 		}
 	}
 }

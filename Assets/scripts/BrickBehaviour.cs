@@ -14,6 +14,8 @@ public class BrickBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (transform.parent != null && transform.localPosition.y + transform.parent.position.y < -6) {
+			GameObject.Destroy (gameObject);
+		}
 	}
 }
