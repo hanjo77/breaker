@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,7 @@ public class BreakerBehaviour : MonoBehaviour {
 	public Material[] materials;
 	public Text scoreTextField;
 	public Text livesTextField;
+	public float scrollSpeed = 2;
 	public int initialLives = 5;
 	public int visibleRows = 20;
 
@@ -59,6 +61,24 @@ public class BreakerBehaviour : MonoBehaviour {
 			} else {
 				livesTextField.text = _lives.ToString();
 			}
+		}
+	}
+
+	private bool _isWarping = false;
+	public bool isWarping {
+		get {
+			return _isWarping;
+		}
+		set {
+			_isWarping = value;
+			playBall.GetComponent<BallBehaviour>().isVisible = !value;
+		}
+	}
+
+	public void CheckWarp(WarpBehaviour warp) {
+		if (isWarping && Math.Abs(warp.transform.position.x - playBall.transform.position.x) < 1) {
+			playBall.transform.position = warp.transform.position;
+			isWarping = false;
 		}
 	}
 
@@ -103,9 +123,13 @@ public class BreakerBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (playBall.transform.position.y - transform.position.y > 2 - transform.position.y) {
+		if (isWarping) {
+			topY += scrollSpeed;
+			float dist = (scrollSpeed - transform.position.y) - topY;
+			transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y + dist, transform.position.z), 10 * Time.fixedDeltaTime);
+		} else if (playBall.transform.position.y - transform.position.y > 2 - transform.position.y) {
 			topY = playBall.transform.position.y - transform.position.y;
-			float dist = (2 - transform.position.y) - topY;
+			float dist = (scrollSpeed - transform.position.y) - topY;
 			transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y + dist, transform.position.z), 10 * Time.fixedDeltaTime);
 		}
 		if ((int)transform.position.y != currentRow) {

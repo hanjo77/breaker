@@ -854,6 +854,11 @@ MonoBehaviour:
       type: 2}
     rotation: 0
     material: {fileID: 2100000, guid: 12f8f24d0ba1244cd8261aa4dc113140, type: 2}
+  - key: 9619
+    tileObject: {fileID: 1361326027520498, guid: 18842d9f733044790acf3c37f50e6af8,
+      type: 2}
+    rotation: 0
+    material: {fileID: 2100000, guid: bf91f00cfd52b4c288030cb6c767dfa1, type: 2}
   brick: {fileID: 1066308811886236, guid: 8d009258c0c5448d7ad757de708e3c86, type: 2}
   materials:
   - {fileID: 2100000, guid: 7aac5c1c3839543be975933c3f10273d, type: 2}

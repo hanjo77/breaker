@@ -16,6 +16,21 @@ public class BallBehaviour : MonoBehaviour {
 	private BatBehaviour bat;
 	private bool isWaiting;
 
+	private bool _isVisible = true;
+	public bool isVisible {
+		get {
+			return _isVisible;
+		}
+		set {
+			_isVisible = value;
+			Renderer r = GetComponent<Renderer> ();
+			Color c = r.material.color;
+			c.a = (_isVisible ? 1 : 0);
+			r.material.color = c;
+			GetComponent<Collider> ().isTrigger = !_isVisible;
+		}
+	}
+
 	// Use this for initialization
 	void Start () {
 		gameInstance = GetComponentInParent<BreakerBehaviour> ();
@@ -26,12 +41,12 @@ public class BallBehaviour : MonoBehaviour {
 
 	// Update is called once per frame
 	void FixedUpdate () {
-		if (!isWaiting) {
+		if (!isWaiting && isVisible) {
 			transform.position += direction * speed * Time.fixedDeltaTime;
 			if (transform.position.y < -6) {
 				gameInstance.lives--;
 				isWaiting = true;
-				StartCoroutine(WaitAfterDeath());
+				StartCoroutine (WaitAfterDeath ());
 				direction *= -1;
 			}
 
@@ -47,6 +62,8 @@ public class BallBehaviour : MonoBehaviour {
 				c.a = .5f;
 				shadow.GetComponent<Renderer> ().material.color = c;
 			}
+		} else if (!isVisible) {
+			transform.position += new Vector3(0, gameInstance.scrollSpeed, 0) * Time.fixedDeltaTime;
 		}
 	}
 

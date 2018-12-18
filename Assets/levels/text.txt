@@ -887,11 +887,11 @@ ww 00      00 ww
 ww 0   uu   0 ww
 ww    l╬╬r    ww
 ww     dd     ww
-ww  u      u  ww
-ww  ╚╗    ╔╝  ww
+wwu▓▓u    u▓▓uww
+ww╚--╣    ╠--╝ww 
 ww   │    │   ww
-ww╔--╣    ╠--╗ww 
-wwd░░d    d░░dww
+ww  ╔╝    ╚╗  ww
+ww  d      d  ww
 ww            ww
 ww     00     ww
 ww    0110    ww
@@ -942,3 +942,13 @@ ww            ww
 ww            ww
 ww            ww
 ww            ww
+u              u
+│              │
+│              │   
+╠--╗11    11╔--╣ 
+│00╚-r    l-╝00│
+│              │
+│              │
+│              │
+│              │
+d              d
