@@ -29,6 +29,7 @@ public class BreakerBehaviour : MonoBehaviour {
 	public float scrollSpeed = 2;
 	public int initialLives = 5;
 	public int visibleRows = 20;
+	public int optionScore = 50;
 
 	private int currentLevel = 0;
 	private int currentRow = 0;

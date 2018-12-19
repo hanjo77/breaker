@@ -939,14 +939,26 @@ ww            ww
 ww            ww
 ww            ww
 ww            ww
-ww            ww
-ww            ww
-ww            ww
+ww    3210    ww
+ww    xoox    ww
+ww    0123    ww
 u              u
 │              │
 │              │   
 ╠--╗11    11╔--╣ 
 │00╚-r    l-╝00│
+│              │
+│              │
+│              │
+│              │
+│              │
+│              │
+│              │
+│              │
+│              │
+│              │
+│              │
+│              │
 │              │
 │              │
 │              │

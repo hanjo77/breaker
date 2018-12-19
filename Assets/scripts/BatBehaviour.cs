@@ -7,14 +7,16 @@ public class BatBehaviour : MonoBehaviour {
 	public float speed = 1;
 	public float minimalBatGap = 2;
 	public GameObject otherBat;
-	public int scaleDurance = 15;
+	public int scaleDuration = 15;
 	public int initialScale = 2;
+	public float deleteDuration = 10;
 
 	private float scaledTime;
 	private bool isScaled;
 	private Vector3 horizontalMotion;
 	private Vector3 verticalMotion;
 	private List<bool> canMove = new List<bool> { true, true };
+	private float? otherBatDeletedTime;
 
 	// Use this for initialization
 	void Start () {
@@ -49,9 +51,25 @@ public class BatBehaviour : MonoBehaviour {
 			otherBat.transform.localPosition = newPos;
 		}
 
-		if (isScaled && Time.fixedTime - scaledTime > scaleDurance) {
+		if (isScaled && Time.fixedTime - scaledTime > scaleDuration) {
 			ResetScale ();
 		}
+
+		if (otherBatDeletedTime != null && Time.fixedTime - otherBatDeletedTime > deleteDuration) {
+			AddOtherBat ();
+		}
+	}
+
+	void AddOtherBat() {
+		otherBatDeletedTime = null;
+		otherBat.GetComponent<Renderer> ().enabled = true;
+		otherBat.GetComponent<Collider> ().isTrigger = false;
+	}
+		
+	public void DeleteOtherBat() {
+		otherBat.GetComponent<Renderer> ().enabled = false;
+		otherBat.GetComponent<Collider> ().isTrigger = true;
+		otherBatDeletedTime = Time.fixedTime;
 	}
 
 	public void ResetScale() {
@@ -79,10 +97,5 @@ public class BatBehaviour : MonoBehaviour {
 		}
 		scaledTime = Time.fixedTime;
 		transform.localScale = scale;
-	}
-
-	void OnCollisionEnter(Collision collision)
-	{
-		GameObject otherObject = collision.collider.gameObject;
 	}
 }

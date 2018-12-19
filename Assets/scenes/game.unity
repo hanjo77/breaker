@@ -859,14 +859,36 @@ MonoBehaviour:
       type: 2}
     rotation: 0
     material: {fileID: 2100000, guid: bf91f00cfd52b4c288030cb6c767dfa1, type: 2}
+  - key: 120
+    tileObject: {fileID: 1066308811886236, guid: 8d009258c0c5448d7ad757de708e3c86,
+      type: 2}
+    rotation: 0
+    material: {fileID: 2100000, guid: 42c60fd234a8e4396b034c8fabf7c407, type: 2}
+  - key: 111
+    tileObject: {fileID: 1066308811886236, guid: 8d009258c0c5448d7ad757de708e3c86,
+      type: 2}
+    rotation: 0
+    material: {fileID: 2100000, guid: d9b36313733dd466b801ef85e8abe8cc, type: 2}
+  - key: 50
+    tileObject: {fileID: 1066308811886236, guid: 8d009258c0c5448d7ad757de708e3c86,
+      type: 2}
+    rotation: 0
+    material: {fileID: 2100000, guid: 9785cfbff281a480ebf64b003efa6059, type: 2}
+  - key: 51
+    tileObject: {fileID: 1066308811886236, guid: 8d009258c0c5448d7ad757de708e3c86,
+      type: 2}
+    rotation: 0
+    material: {fileID: 2100000, guid: 2e641f5aba5c5449390e98743f4ce981, type: 2}
   brick: {fileID: 1066308811886236, guid: 8d009258c0c5448d7ad757de708e3c86, type: 2}
   materials:
   - {fileID: 2100000, guid: 7aac5c1c3839543be975933c3f10273d, type: 2}
   - {fileID: 2100000, guid: ca1da072dd4204dfe80c4e98c4093ecc, type: 2}
   scoreTextField: {fileID: 472716740}
   livesTextField: {fileID: 2077508694}
+  scrollSpeed: 2
   initialLives: 5
   visibleRows: 16
+  optionScore: 50
 --- !u!4 &2016423705
 Transform:
   m_ObjectHideFlags: 0

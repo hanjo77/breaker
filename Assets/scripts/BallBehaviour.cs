@@ -15,7 +15,7 @@ public class BallBehaviour : MonoBehaviour {
 	private BreakerBehaviour gameInstance;
 	private BatBehaviour bat;
 	private bool isWaiting;
-	private Renderer renderer;
+	private Renderer myRenderer;
 
 	private bool _isVisible = true;
 	public bool isVisible {
@@ -24,14 +24,14 @@ public class BallBehaviour : MonoBehaviour {
 		}
 		set {
 			_isVisible = value;
-			renderer.enabled = value;
+			myRenderer.enabled = value;
 			GetComponent<Collider> ().isTrigger = !_isVisible;
 		}
 	}
 
 	// Use this for initialization
 	void Start () {
-		renderer = GetComponent<Renderer> ();
+		myRenderer = GetComponent<Renderer> ();
 		gameInstance = GetComponentInParent<BreakerBehaviour> ();
 		bat = GameObject.FindGameObjectsWithTag("Bat")[0].GetComponent<BatBehaviour>();
 		lastUpdate = Time.fixedTime;
@@ -113,6 +113,10 @@ public class BallBehaviour : MonoBehaviour {
 					bat.Shrink ();
 				} else if (brick.brickType == '>') {
 					bat.Grow ();
+				} else if (brick.brickType == 'x') {
+					bat.DeleteOtherBat ();
+				} else if (brick.brickType == 'o') {
+					gameInstance.score += gameInstance.optionScore;
 				}
 				gameInstance.score += brick.score;
 				GameObject.Destroy (otherObject);
