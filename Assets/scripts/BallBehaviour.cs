@@ -15,6 +15,7 @@ public class BallBehaviour : MonoBehaviour {
 	private BreakerBehaviour gameInstance;
 	private BatBehaviour bat;
 	private bool isWaiting;
+	private Renderer renderer;
 
 	private bool _isVisible = true;
 	public bool isVisible {
@@ -23,16 +24,14 @@ public class BallBehaviour : MonoBehaviour {
 		}
 		set {
 			_isVisible = value;
-			Renderer r = GetComponent<Renderer> ();
-			Color c = r.material.color;
-			c.a = (_isVisible ? 1 : 0);
-			r.material.color = c;
+			renderer.enabled = value;
 			GetComponent<Collider> ().isTrigger = !_isVisible;
 		}
 	}
 
 	// Use this for initialization
 	void Start () {
+		renderer = GetComponent<Renderer> ();
 		gameInstance = GetComponentInParent<BreakerBehaviour> ();
 		bat = GameObject.FindGameObjectsWithTag("Bat")[0].GetComponent<BatBehaviour>();
 		lastUpdate = Time.fixedTime;
@@ -62,8 +61,6 @@ public class BallBehaviour : MonoBehaviour {
 				c.a = .5f;
 				shadow.GetComponent<Renderer> ().material.color = c;
 			}
-		} else if (!isVisible) {
-			transform.position += new Vector3(0, gameInstance.scrollSpeed, 0) * Time.fixedDeltaTime;
 		}
 	}
 
@@ -76,6 +73,10 @@ public class BallBehaviour : MonoBehaviour {
 	{
 		yield return new WaitForSeconds(2);
 		isWaiting = false;
+	}
+
+	void OnTriggerEnter (Collider col) {
+		
 	}
 
 	void OnCollisionEnter(Collision collision)

@@ -38,7 +38,7 @@ Transform:
   m_GameObject: {fileID: 1310191969147496}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  minimalBatGap: 2
+  minimalBatGap: 1
   otherBat: {fileID: 1247166522941006, guid: a1f51a37741044118b67af7a8ca67fc3, type: 2}
   scaleDurance: 15
   initialScale: 2

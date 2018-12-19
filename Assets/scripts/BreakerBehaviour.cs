@@ -77,7 +77,7 @@ public class BreakerBehaviour : MonoBehaviour {
 
 	public void CheckWarp(WarpBehaviour warp) {
 		if (isWarping && Math.Abs(warp.transform.position.x - playBall.transform.position.x) < 1) {
-			playBall.transform.position = warp.transform.position;
+			playBall.transform.position = new Vector3(warp.transform.position.x, warp.transform.position.y, 0);
 			isWarping = false;
 		}
 	}
@@ -100,7 +100,7 @@ public class BreakerBehaviour : MonoBehaviour {
 				}
 				if (tile != null) {
 					tile.transform.SetParent (transform);
-					tile.transform.localPosition = new Vector3 (charNr - 7.5f, levelLines.Length - (lineNr + 5), 0);
+					tile.transform.localPosition = new Vector3 (charNr - 7.5f, levelLines.Length - (lineNr + 5), tile.transform.position.z);
 				}
 			}
 		}
