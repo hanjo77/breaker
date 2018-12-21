@@ -117,6 +117,16 @@ public class BallBehaviour : MonoBehaviour {
 					bat.DeleteOtherBat ();
 				} else if (brick.brickType == 'o') {
 					gameInstance.score += gameInstance.optionScore;
+				} else if ("RBGY".IndexOf(brick.brickType.ToString()) > -1) {
+					if (brick.brickType == 'R') {
+						gameInstance.UpdateBonus(BonusPanelBehaviour.ButtonColor.red);
+					} else if (brick.brickType == 'G') {
+						gameInstance.UpdateBonus(BonusPanelBehaviour.ButtonColor.green);
+					} else if (brick.brickType == 'B') {
+						gameInstance.UpdateBonus(BonusPanelBehaviour.ButtonColor.blue);
+					} else if (brick.brickType == 'Y') {
+						gameInstance.UpdateBonus(BonusPanelBehaviour.ButtonColor.yellow);
+					}
 				}
 				gameInstance.score += brick.score;
 				GameObject.Destroy (otherObject);

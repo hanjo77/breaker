@@ -23,6 +23,7 @@ public class BreakerBehaviour : MonoBehaviour {
 	public Tile[] tiles;
 
 	public GameObject brick;
+	public BonusPanelBehaviour bonusPanel;
 	public Material[] materials;
 	public Text scoreTextField;
 	public Text livesTextField;
@@ -80,6 +81,14 @@ public class BreakerBehaviour : MonoBehaviour {
 		if (isWarping && Math.Abs(warp.transform.position.x - playBall.transform.position.x) < 1) {
 			playBall.transform.position = new Vector3(warp.transform.position.x, warp.transform.position.y, 0);
 			isWarping = false;
+		}
+	}
+
+	public void UpdateBonus(BonusPanelBehaviour.ButtonColor buttonColor) {
+		bonusPanel.SwitchButton (buttonColor);
+		if (bonusPanel.IsBonusActive ()) {
+			bonusPanel.Reset ();
+			lives++;
 		}
 	}
 

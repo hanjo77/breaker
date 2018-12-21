@@ -54,6 +54,7 @@
      <Compile Include="Assets\scripts\BallBehaviour.cs" />
      <Compile Include="Assets\scripts\BallShadowBehaviour.cs" />
      <Compile Include="Assets\scripts\BatBehaviour.cs" />
+     <Compile Include="Assets\scripts\BonusPanelBehaviour.cs" />
      <Compile Include="Assets\scripts\BreakerBehaviour.cs" />
      <Compile Include="Assets\scripts\BrickBehaviour.cs" />
      <Compile Include="Assets\scripts\GameOverScreenBehaviour.cs" />
