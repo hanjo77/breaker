@@ -41,8 +41,10 @@ public class BallBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		if (!isWaiting && isVisible) {
-			transform.position += direction * speed * Time.fixedDeltaTime;
-			if (transform.position.y < -6) {
+			Vector3 newPos = transform.position + direction * speed * Time.fixedDeltaTime;
+            newPos.z = 0;
+            transform.position = newPos;
+            if (transform.position.y < -1 * gameInstance.visibleRows / 2) {
 				gameInstance.lives--;
 				isWaiting = true;
 				StartCoroutine (WaitAfterDeath ());

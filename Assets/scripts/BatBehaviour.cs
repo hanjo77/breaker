@@ -13,16 +13,22 @@ public class BatBehaviour : MonoBehaviour {
 
 	private float scaledTime;
 	private bool isScaled;
+    private FloatingJoystick joyStick;
 	private Vector3 horizontalMotion;
 	private Vector3 verticalMotion;
 	private List<bool> canMove = new List<bool> { true, true };
 	private float? otherBatDeletedTime;
+    private BreakerBehaviour gameInstance;
 
 	// Use this for initialization
 	void Start () {
-		transform.position = new Vector3(0, -4, 0);
-
 		ResetScale ();
+
+        joyStick = GameObject.FindGameObjectWithTag("Joystick").GetComponent<FloatingJoystick>();
+        joyStick.gameObject.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Screen.width);
+        joyStick.gameObject.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, Screen.height);
+
+        gameInstance = GameObject.Find("playground").GetComponent<BreakerBehaviour>();
 
 		otherBat = GameObject.Instantiate (otherBat);
 		otherBat.transform.SetParent (transform);
@@ -39,15 +45,15 @@ public class BatBehaviour : MonoBehaviour {
 			canMove = new List<bool> { true, false };
 		}
 
-		float horizontalSpeed = Input.GetAxis ("Horizontal");
+		float horizontalSpeed = Input.GetAxis("Horizontal") + Input.GetAxis("Horizontal") + joyStick.Horizontal;
 		if ((canMove[0] || horizontalSpeed > 0) && (canMove[1] || horizontalSpeed < 0)) {
-			horizontalMotion = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
+			horizontalMotion = new Vector3(Input.GetAxis("Horizontal") + joyStick.Horizontal, 0, 0);
 			transform.position += horizontalMotion * speed * Time.deltaTime;
 			canMove = new List<bool> { true, true };
 		}
-		verticalMotion = new Vector3 (0, Input.GetAxis ("Vertical"), 0);
+		verticalMotion = new Vector3 (0, Input.GetAxis ("Vertical") + joyStick.Vertical, 0);
 		Vector3 newPos = otherBat.transform.localPosition + verticalMotion * speed * Time.deltaTime;
-		if (newPos.y > minimalBatGap && newPos.y < 10) {
+		if (newPos.y > minimalBatGap && newPos.y < gameInstance.visibleRows - 6) {
 			otherBat.transform.localPosition = newPos;
 		}
 

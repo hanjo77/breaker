@@ -28,9 +28,10 @@ public class BreakerBehaviour : MonoBehaviour {
 	public Text scoreTextField;
 	public Text livesTextField;
 	public float scrollSpeed = 2;
+	public int columns = 16;
 	public int initialLives = 5;
-	public int visibleRows = 20;
 	public int optionScore = 50;
+	public int visibleRows = 20;
 
 	private int currentLevel = 0;
 	private int currentRow = 0;
@@ -110,7 +111,7 @@ public class BreakerBehaviour : MonoBehaviour {
 				}
 				if (tile != null) {
 					tile.transform.SetParent (transform);
-					tile.transform.localPosition = new Vector3 (charNr - 7.5f, levelLines.Length - (lineNr + 5), tile.transform.position.z);
+					tile.transform.localPosition = new Vector3 (charNr - 7.5f, levelLines.Length - (lineNr + (visibleRows / 2)), tile.transform.position.z);
 				}
 			}
 		}
@@ -119,15 +120,22 @@ public class BreakerBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Camera cam = GameObject.Find("cam").GetComponent<Camera> ();
+		visibleRows = (int)Math.Ceiling((double)(Screen.height / (Screen.width / columns))) + 2;
+		float currentAspect = (float) Screen.width / (float) Screen.height;
+		cam.orthographicSize = columns / 2 / currentAspect;
+		Debug.Log (cam.orthographicSize);
+		Debug.Log (Screen.width + " x " + Screen.height);
 		levelLines = levels [currentLevel].text.Split('\n');
 		lastRow = levelLines.Length;
 		lives = initialLives;
 		score = 0;
 		playBat = GameObject.Instantiate (bat);
 		playBall = GameObject.Instantiate (ball);
-		playBall.transform.position = playBat.transform.position + new Vector3(0, 2, 0);
 		playBat.transform.SetParent(transform.parent);
+		playBat.transform.position = new Vector3 (playBat.transform.position.x, -1 * ((visibleRows / 2) - 2), playBat.transform.position.z);
 		playBall.transform.SetParent(transform);
+		playBall.transform.position = playBat.transform.position + new Vector3(0, 2, 0);
 		DrawLevel ();
 	}
 	

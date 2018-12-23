@@ -8,6 +8,7 @@ TagManager:
   - Ball
   - Bat
   - Wall
+  - Joystick
   layers:
   - Default
   - TransparentFX
